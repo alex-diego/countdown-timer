@@ -1,0 +1,99 @@
+:root {
+  --color-background: rgb(219, 82, 77);
+  --color-text: #fff;
+  --color-text-button: rgb(219, 82, 77);
+
+  font-size: 62.5%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-background);
+  font-family: 'Montserrat', sans-serif;
+}
+
+.container {
+  width: 50%;
+  margin: 0 auto;
+}
+
+/* Header ===============================*/
+.header {
+  width: 100%;
+  height: 60px;
+  padding: 20px 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color: #fff;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1)
+}
+
+.header__author {
+  font-size: 1.2rem;
+}
+
+/* Logo ===============================*/
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo__icon {
+  width: 30px;
+}
+
+/* Main ===============================*/
+.form-container {
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Form ===============================*/
+.form {
+  width: 100%;
+  padding: 20px;
+
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;  
+}
+
+.input-block {
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 10px;
+}
+
+.label,
+.paragraph {
+  color: #fff;
+  font-size: 1.4rem;
+}
+
+.label {
+  margin-bottom: 5px;
+}
+
+input {
+  outline: none;
+}
+
+.button {
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 2px dotted rgba(255, 255, 255, 0.459);
+
+  padding: 5px 25px;
+  cursor: pointer;
+}
+
+.add {
+  margin-right: 10px;
+}
