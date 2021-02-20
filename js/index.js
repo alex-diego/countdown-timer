@@ -2,6 +2,7 @@ const app = {
   events: [],
 
   addAlarm() {
+    const name = DOM.inputName.value.replace(/ /g, "")
     const dateAlarm = new Date(DOM.inputDate.value).getTime()
     const now = Date.now()
     const distance = dateAlarm - now
@@ -10,7 +11,16 @@ const app = {
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    const name = DOM.inputName.value
+
+
+    if (name.length < 1 || DOM.inputDate.value == '') {
+      return DOM.messageErro("Preencha todas as informações!")
+    }
+
+    if (days < 0 || hours < 0 || minutes < 0 || seconds < 0) {
+      return DOM.messageErro("Data invalida! (Você já está atrasado)")
+    }
+
 
     app.events.push(
       {
@@ -31,6 +41,7 @@ const DOM = {
   inputName: document.querySelector('#name-event'),
   form: document.querySelector('#form'),
   countDown: document.querySelector('#countdown'),
+  erroContainer: document.querySelector('#message-erro'),
 
   renderLayout() {
     this.countDown.innerHTML = ''
@@ -63,6 +74,15 @@ const DOM = {
       `
       this.countDown.innerHTML += layout
     })
+  },
+
+  messageErro(message) {
+    this.erroContainer.querySelector('.label-erro').innerText = message
+    this.erroContainer.classList.add('active')
+
+    setTimeout(() => {
+      this.erroContainer.classList.remove('active')
+    }, 4000)
   }
 }
 

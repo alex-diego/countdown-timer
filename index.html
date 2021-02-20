@@ -24,11 +24,11 @@
         <div class="form-group">
           <div class="input-block">
             <label class="label" for="date">Data e Hora do evento: </label>
-            <input type="datetime-local" id="date">
+            <input type="datetime-local" id="date" required>
           </div>
           <div class="input-block">
             <label class="label" for="name-event">Nome do evento: </label>
-            <input type="text" id="name-event" maxlength="30">
+            <input type="text" id="name-event" maxlength="30" required>
           </div>
         </div>
         <div class="form-group">
@@ -41,6 +41,11 @@
     </div>
     <div class="countdown" id="countdown">
     </div>
+  </div>
+
+  <div class="message-erro" id="message-erro">
+    <img src="./img/warning_amber-white-18dp.svg" alt="warning">
+    <span class="label-erro"></span>
   </div>
 
   <script src="./js/index.js"></script>

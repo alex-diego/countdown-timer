@@ -1,9 +1,13 @@
 :root {
-  --color-background: rgb(219, 82, 77);
+  --color-background: rgb(43, 161, 53);
   --color-text: #fff;
-  --color-text-button: rgb(219, 82, 77);
+  --color-erro: rgb(161, 43, 43);
 
   font-size: 62.5%;
+}
+
+.active {
+  display: flex;
 }
 
 * {
@@ -134,4 +138,50 @@ input {
 .count-name {
   font-size: 1rem;
   margin-left: 4px;
+}
+
+/* Message erro ===============================*/
+.message-erro {
+  display: none;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 60px;
+
+  padding: 10px;
+  background-color: var(--color-erro);
+}
+
+.message-erro.active {
+  display: flex;
+}
+
+.message-erro::after {
+  animation: erro 4s;
+  content: '';
+  position: absolute;
+
+  bottom: 0;
+
+  width: 100%;
+  height: 4px;
+  background-color: rgb(199, 20, 20);
+}
+
+.label-erro {
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+@keyframes erro {
+  100% {
+    width: 1px;
+  }
 }
