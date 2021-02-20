@@ -2,7 +2,7 @@
 
 ## 🚧 Em construção
 ### Para fazer:
-- [ x ] O usuário pode ver uma caixa de entrada de evento contendo um campo de nome de evento, um campo de data, uma hora opcional e um botão 'Iniciar'.
+✅ O usuário pode ver uma caixa de entrada de evento contendo um campo de nome de evento, um campo de data, uma hora opcional e um botão 'Iniciar'.
 - [ ] O usuário pode definir o evento inserindo seu nome, a data programada para ocorrer e um horário opcional para o evento. Se a hora for omitida, presume-se que seja a meia-noite da data do evento no fuso horário local.
 - [ ] O usuário pode ver uma mensagem de aviso se o nome do evento estiver em branco.
 - [ ] O usuário pode ver uma mensagem de aviso se o tempo até os dados do evento e o tempo que foi inserido ultrapassar a precisão do cronômetro de contagem regressiva.
