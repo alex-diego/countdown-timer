@@ -21,7 +21,6 @@ const app = {
       return DOM.messageErro("Data invalida! (Você já está atrasado)")
     }
 
-
     app.events.push(
       {
         name,
@@ -32,6 +31,43 @@ const app = {
       }
     )
 
+    if (app.events.length == 1) {
+      app.count = setInterval(app.countDown, 1000)
+    }
+
+  },
+
+  countDown() {
+    app.events.forEach((event, index) => {
+      if (event.days == 0 && event.hours == 0 && event.minutes == 0 && event.seconds == 0) {
+        alert(`${event.name} finalizado!`)
+        app.events.splice(index, 1)
+      }
+
+      if (event.seconds == 0) {
+        if (event.minutes > 0) {
+          event.minutes--
+        }
+        event.seconds = 60
+      }
+      if (event.minutes == 0) {
+        if (event.hours > 0) {
+          event.hours--
+        }
+      }
+      if (event.hours == 0) {
+        if (event.days > 0) {
+          event.days--
+        }
+      }
+
+      event.seconds--
+      DOM.renderLayout()
+    });
+
+    if (app.events.length == 0) {
+      clearInterval(app.count);
+    }
   }
 }
 
@@ -40,11 +76,11 @@ const DOM = {
   inputDate: document.querySelector('#date'),
   inputName: document.querySelector('#name-event'),
   form: document.querySelector('#form'),
-  countDown: document.querySelector('#countdown'),
+  countDownContainer: document.querySelector('#countdown'),
   erroContainer: document.querySelector('#message-erro'),
 
   renderLayout() {
-    this.countDown.innerHTML = ''
+    this.countDownContainer.innerHTML = ''
     
     app.events.forEach((event) => {
       layout = `
@@ -72,7 +108,7 @@ const DOM = {
         </div>
       </div>
       `
-      this.countDown.innerHTML += layout
+      this.countDownContainer.innerHTML += layout
     })
   },
 
