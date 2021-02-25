@@ -3,6 +3,8 @@
 <img src="./gif.gif" />
 <br>
 
+Você pode testar o projeto <a href="https://projeto-countdown.web.app/">Aqui.</a>
+
 ## ✔ Finalizado
 ### Funcionalidades:
 - ✅ O usuário pode definir o evento inserindo seu nome, a data programada para ocorrer e um horário para o evento.
