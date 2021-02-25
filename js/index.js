@@ -1,25 +1,12 @@
 const app = {
   events: [],
 
-  addAlarm() {
-    const name = DOM.inputName.value.replace(/ /g, "")
-    const dateAlarm = new Date(DOM.inputDate.value).getTime()
-    const now = Date.now()
-    const distance = dateAlarm - now
-
+  addAlarm(name, dateAlarm, distance) {
+    
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-
-    if (name.length < 1 || DOM.inputDate.value == '') {
-      return DOM.messageErro("Preencha todas as informações!")
-    }
-
-    if (days < 0 || hours < 0 || minutes < 0 || seconds < 0) {
-      return DOM.messageErro("Data invalida! (Você já está atrasado)")
-    }
 
     app.events.push(
       {
@@ -88,31 +75,12 @@ const app = {
     }
 
     events.forEach((event) => {
-
-      const now = Date.now()
-      const distance = event.dateAlarm - now
+      const distance = event.dateAlarm - Date.now()
       
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      
-      app.events.push(
-        {
-          name: event.name,
-          days,
-          hours,
-          minutes,
-          seconds,
-          dateAlarm: event.dateAlarm
-        }
-      )
+      app.addAlarm(event.name, event.dateAlarm, distance)
     })
 
-    app.saveInStorage()
     DOM.renderLayout()
-
-    app.count = setInterval(app.countDown, 1000)
   }
 }
 
@@ -172,7 +140,20 @@ const DOM = {
 
 
 DOM.buttonAdd.addEventListener('click', () => {
-  app.addAlarm()
+
+  const name = DOM.inputName.value.replace(/ /g, "")
+  const dateAlarm = new Date(DOM.inputDate.value).getTime()
+  const distance = dateAlarm - Date.now()
+
+  if (name.length < 1 || DOM.inputDate.value == '') {
+    return DOM.messageErro("Preencha todas as informações!")
+  }
+
+  if (distance < 0) {
+    return DOM.messageErro("Data invalida! (Você já está atrasado)")
+  }
+
+  app.addAlarm(name, dateAlarm, distance)
   DOM.renderLayout()
 })
 
