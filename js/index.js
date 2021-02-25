@@ -27,9 +27,12 @@ const app = {
         days,
         hours,
         minutes,
-        seconds
+        seconds,
+        dateAlarm
       }
     )
+
+    app.saveInStorage()
 
     if (app.events.length == 1) {
       app.count = setInterval(app.countDown, 1000)
@@ -39,9 +42,10 @@ const app = {
 
   countDown() {
     app.events.forEach((event, index) => {
-      if (event.days == 0 && event.hours == 0 && event.minutes == 0 && event.seconds == 0) {
+      if (event.days <= 0 && event.hours <= 0 && event.minutes <= 0 && event.seconds <= 0) {
         alert(`${event.name} finalizado!`)
         app.events.splice(index, 1)
+        app.saveInStorage()
       }
 
       if (event.seconds == 0) {
@@ -62,12 +66,53 @@ const app = {
       }
 
       event.seconds--
+      event.dateAlarm -= 1000
       DOM.renderLayout()
     });
 
     if (app.events.length == 0) {
       clearInterval(app.count);
     }
+  },
+
+  saveInStorage() {
+    localStorage.setItem("events", JSON.stringify(app.events))
+  },
+
+  loadStorage() {
+    const events = JSON.parse(localStorage.getItem("events"))
+
+    if (!events) {
+      console.log("Ainda não tem storage")
+      return
+    }
+
+    events.forEach((event) => {
+
+      const now = Date.now()
+      const distance = event.dateAlarm - now
+      
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+      app.events.push(
+        {
+          name: event.name,
+          days,
+          hours,
+          minutes,
+          seconds,
+          dateAlarm: event.dateAlarm
+        }
+      )
+    })
+
+    app.saveInStorage()
+    DOM.renderLayout()
+
+    app.count = setInterval(app.countDown, 1000)
   }
 }
 
