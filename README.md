@@ -2,6 +2,7 @@
 
 <img src="./gif.gif" />
 <br>
+
 ## ✔ Finalizado
 ### Funcionalidades:
 - ✅ O usuário pode definir o evento inserindo seu nome, a data programada para ocorrer e um horário para o evento.
